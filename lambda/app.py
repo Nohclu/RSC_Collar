@@ -1,6 +1,7 @@
 import json
 import boto3
 import config
+from entry import Entry
 # import requests
 
 dynamodb = boto3.resource(
@@ -13,20 +14,21 @@ dynamodb = boto3.resource(
 table = dynamodb.Table("cmulready_2023")
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
+    """Transforms and stores SQS messages into DynamoDb
 
     Parameters
     ----------
     event: dict, required
     context: object, required
+
+    Return
+    ------
+    statusCode: dict
     """
 
-    table.put_item(Item=event)
+    entry = Entry(event)    
+    table.put_item(Item=entry.getEntry())
 
     return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
+        "statusCode": 200
     }

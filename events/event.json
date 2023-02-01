@@ -1,5 +1,5 @@
 {
-  "collarId": "12345",
+  "collarId": "123456",
   "data": {
    "location": {
        "lat": 1,
@@ -13,6 +13,6 @@
        "heartRate": 1
    }
   },
-  "messageType": "string",
+  "messageType": "PET_STATUS",
   "timestamp": "1"
 }

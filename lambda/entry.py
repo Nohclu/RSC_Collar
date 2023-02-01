@@ -1,50 +1,36 @@
-from mimetypes import init
-
-
 class Entry:
-    def __init__(self):
-        
+    """Stores SQS Message
 
+    Parameters
+    ----------
+    event: dict, required
+    """
 
+    MAPPINGS = {
+        "PET_STATUS":"pet",
+        "BATTERY_STATUS":"battery",
+        "LOCATION":"location"
+        }
+    
+    def __init__(self, event):
+        self._collarId = event["collarId"]
+        self._timeStamp = event["timestamp"]
+        self._messageType = event["messageType"]
+        self._data = event["data"][self.MAPPINGS[self._messageType]]
 
-        {
-#   "collarId": uuid, -> String
-#   "data": {
-#    "location": {
-#        "lat": 1,
-#        "long": 1
-#      },
-#   "battery": {
-#       "percentage": 1
-#     },
-#    "pet": {
-#        "status": "string",
-#        "heartRate": 1
-#    }
-#   },
-#   "messageType": "string",
-#   "timestamp": number -> String
-# }
+    def getCollarID(self):
+        return self._collarId
 
-    # "Table": {
-    #     "AttributeDefinitions": [
-    #         {
-    #             "AttributeName": "collarId",
-    #             "AttributeType": "S"
-    #         },
-    #         {
-    #             "AttributeName": "timestamp",
-    #             "AttributeType": "S"
-    #         }
-    #     ],
-    #     "TableName": "cmulready_2023",
-    #     "KeySchema": [
-    #         {
-    #             "AttributeName": "collarId",
-    #             "KeyType": "HASH"
-    #         },
-    #         {
-    #             "AttributeName": "timestamp",
-    #             "KeyType": "RANGE"
-    #         }
-    #     ]
+    def getTimeStamp(self):
+        return self._timeStamp
+
+    def getData(self):
+        return self._data
+
+    def getEntry(self):
+        return {"collarId":self._collarId,
+                "data": {
+                    self.MAPPINGS[self._messageType]: self._data
+                    },
+                "timestamp": self._timeStamp
+                }
