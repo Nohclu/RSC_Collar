@@ -1,25 +1,26 @@
-class Location:
+from entry import Entry
+
+class Location(Entry):
     
     def __init__(self, collarId, timestamp, lat, long):
-        self._collarId = collarId
-        self._timeStamp = timestamp
+        super().__init__(collarId, timestamp)
         self._lat = lat
         self._long = long
 
     def getCollarID(self):
-        return self._collarId
+        return self.__getCollarID()
 
     def getTimeStamp(self):
-        return self._timeStamp
+        return self.__getTimeStamp()
 
     def getData(self):
         return self._data
 
     def getEntry(self):
-        return {"collarId":self._collarId,
+        return {"collarId":self.getCollarID(),
                 "data": {
                     "lat": self._lat,
                     "long": self._long
                 },
-                "timestamp": self._timeStamp
+                "timestamp": self.getTimeStamp()
                 }

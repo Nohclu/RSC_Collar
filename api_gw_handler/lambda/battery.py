@@ -1,23 +1,24 @@
-class Battery:
+from entry import Entry
+
+class Battery(Entry):
     
     def __init__(self, collarId, timestamp, percentage):
-        self._collarId = collarId
-        self._timeStamp = timestamp
+        super().__init__(collarId,timestamp)
         self._percentage = percentage
 
     def getCollarID(self):
-        return self._collarId
+        return self.__getCollarID()
 
     def getTimeStamp(self):
-        return self._timeStamp
+        return self.__getTimeStamp()
 
     def getData(self):
         return self._data
 
     def getEntry(self):
-        return {"collarId":self._collarId,
+        return {"collarId":self.getCollarID(),
                 "data": {
                     "percentage": self._percentage
                 },
-                "timestamp": self._timeStamp
+                "timestamp": self.getTimeStamp()
                 }
