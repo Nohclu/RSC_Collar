@@ -14,18 +14,24 @@ dynamodb = boto3.resource(
 
 table = dynamodb.Table("cmulready_2023")
 
+def getEntry(uuid, timestamp):
+    response = dynamodb.get_item(
+        Key={
+            "uuid": uuid, "timestamp": timestamp
+        }
+    )
+    return response
+
 def lambda_handler(event, context):
 
     if event["path"] == "getbattery" and event["httpMethod"] == "GET":
-        # GetLatest Battery Entry
-        pass
+        b = Battery()
+        return
     elif event["path"] == "getlocation" and event["httpMethod"] == "GET":
+        l = Location()
         # getLatest Location entry
-        pass
+        return
     elif event["path"] == "getpet" and event["httpMethod"] == "GET":
+        p = Pet()
         # getLatest pet entry
-        pass
-
-    return {
-        "statusCode": 200
-    }
+        return
