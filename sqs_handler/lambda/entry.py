@@ -27,10 +27,14 @@ class Entry:
     def getData(self):
         return self._data
 
+    def getMessageType(self):
+        return self._messageType
+
     def getEntry(self):
         return {"collarId":self._collarId,
                 "data": {
                     self.mappings[self._messageType]: self._data
                     },
+                "messageType": self._messageType,
                 "timestamp": self._timeStamp
                 }
