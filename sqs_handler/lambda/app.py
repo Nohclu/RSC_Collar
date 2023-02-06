@@ -1,8 +1,6 @@
-import json
 import boto3
 import config
 from entry import Entry
-# import requests
 
 dynamodb = boto3.resource(
         "dynamodb",

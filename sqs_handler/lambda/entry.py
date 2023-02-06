@@ -6,7 +6,7 @@ class Entry:
     event: dict, required
     """
 
-    MAPPINGS = {
+    mappings = {
         "PET_STATUS":"pet",
         "BATTERY_STATUS":"battery",
         "LOCATION":"location"
@@ -16,7 +16,7 @@ class Entry:
         self._collarId = event["collarId"]
         self._timeStamp = event["timestamp"]
         self._messageType = event["messageType"]
-        self._data = event["data"][self.MAPPINGS[self._messageType]]
+        self._data = event["data"][self.mappings[self._messageType]]
 
     def getCollarID(self):
         return self._collarId
@@ -30,7 +30,7 @@ class Entry:
     def getEntry(self):
         return {"collarId":self._collarId,
                 "data": {
-                    self.MAPPINGS[self._messageType]: self._data
+                    self.mappings[self._messageType]: self._data
                     },
                 "timestamp": self._timeStamp
                 }
