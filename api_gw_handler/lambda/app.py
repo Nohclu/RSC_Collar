@@ -15,17 +15,7 @@ dynamodb = boto3.resource(
 table = dynamodb.Table("cmulready_2023")
 
 def lambda_handler(event, context):
-    """Transforms and stores SQS messages into DynamoDb
 
-    Parameters
-    ----------
-    event: dict, required
-    context: object, required
-
-    Return
-    ------
-    statusCode: dict
-    """
     if event["path"] == "getbattery" and event["httpMethod"] == "GET":
         # GetLatest Battery Entry
         pass
